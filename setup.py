@@ -8,7 +8,7 @@ def get_version(package):
     """
     Return package version as listed in `__version__` in `__init__.py`.
     """
-    init_py = open(os.path.join(package, '__init__.py')).read()
+    init_py = open(os.path.join(package, '__init__.py'),'rb').read()
     mth = re.search("__version__\s?=\s?['\"]([^'\"]+)['\"]", init_py)
     if mth:
         return mth.group(1)
@@ -22,7 +22,7 @@ def install_requires():
     :return:
     """
     try:
-        with open("requirements.txt") as f:
+        with open("requirements.txt",'rb') as f:
             return [line.strip() for line in f.readlines() if line.strip()]
     except OSError:
         return []
